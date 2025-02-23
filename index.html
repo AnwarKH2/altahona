@@ -90,13 +90,38 @@
                 document.getElementById("langbut").innerText = "🌍עִברִית";
             }
         }
+         async function loadGallery() {
+            const galleryContainer = document.querySelector(".gallery");
+            const repoOwner = "AnwarKH2";  // اسم المستخدم على GitHub
+            const repoName = "altahona";  // اسم المستودع
+            const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/`;
+
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error("فشل في جلب البيانات");
+
+                const files = await response.json();
+                files.forEach(file => {
+                    if (file.type === "file" && (file.name.endsWith(".jpg") || file.name.endsWith(".png") || file.name.endsWith(".jpeg"))) {
+                        const img = document.createElement("img");
+                        img.src = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${file.name}`;
+                        img.alt = "صورة من المعرض";
+                        galleryContainer.appendChild(img);
+                    }
+                });
+            } catch (error) {
+                console.error("خطأ في تحميل الصور:", error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadGallery);
     </script>
 </head>
 <body>
     <header>
         <button id="langbut" class="language-toggle" onclick="toggleLanguage()">🌍עִברִית</button>
         <img src="logo.png" alt="شعار الطاحونة" class="logo">
-        <h1 id="title">مصنع الطاحونة - Altahona</h1>
+        <h1 id="title">Altahona</h1>
     </header>
     <section>
         <h2 id="sup">نبذة عن المصنع</h2>
