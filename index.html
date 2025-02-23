@@ -79,6 +79,7 @@
                 document.getElementById("contact").innerText = "צור קשר";
                 document.getElementById("works").innerText = "העבודות שלנו";
                 document.getElementById("sup").innerText = "סקירה על המפעל";
+                document.getElementById("langbut").innerText = "🌍عربية";
             } else {
                 document.documentElement.lang = "ar";
                 document.getElementById("title").innerText = "مصنع الطاحونة - Al-Tahoonah";
@@ -86,13 +87,14 @@
                 document.getElementById("contact").innerText = "تواصل معنا";
                 document.getElementById("works").innerText = "أعمالنا";
                 document.getElementById("sup").innerText = "نبذة عن المصنع";
+                document.getElementById("langbut").innerText = "🌍עִברִית";
             }
         }
     </script>
 </head>
 <body>
     <header>
-        <button class="language-toggle" onclick="toggleLanguage()">🌍 تغيير اللغة</button>
+        <button id="langbut" class="language-toggle" onclick="toggleLanguage()">🌍עִברִית</button>
         <img src="logo.png" alt="شعار الطاحونة" class="logo">
         <h1 id="title">مصنع الطاحونة - Altahona</h1>
     </header>
