@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Tahoonah</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+        header {
+            background-color: #004d40;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            position: relative;
+        }
+        .language-toggle {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: white;
+            color: #004d40;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        section {
+            padding: 20px;
+        }
+        footer {
+            background-color: #004d40;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+            background: transparent;
+        }
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+        }
+        .gallery img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+        .social-icons img {
+            width: 30px;
+            height: auto;
+            margin: 5px;
+        }
+    </style>
+    <script>
+        function toggleLanguage() {
+            const lang = document.documentElement.lang;
+            if (lang === "ar") {
+                document.documentElement.lang = "he";
+                document.getElementById("title").innerText = "טחונה בעמ";
+                document.getElementById("about").innerText = "במפעל טחונה אנו מספקים דלתות, חלונות, מעקות ומבנים מתכתיים בעיצובים איכותיים המתאימים לצרכים שלך.";
+                document.getElementById("contact").innerText = "צור קשר";
+                document.getElementById("works").innerText = "העבודות שלנו";
+                document.getElementById("sup").innerText = "סקירה על המפעל";
+            } else {
+                document.documentElement.lang = "ar";
+                document.getElementById("title").innerText = "مصنع الطاحونة - Al-Tahoonah";
+                document.getElementById("about").innerText = "في محددة الطاحونة، نوفر لك أجود أنواع الأبواب، النوافذ، الدرابزين، والهياكل المعدنية بتصاميم قوية ومبتكرة تناسب احتياجاتك";
+                document.getElementById("contact").innerText = "تواصل معنا";
+                document.getElementById("works").innerText = "أعمالنا";
+                document.getElementById("sup").innerText = "نبذة عن المصنع";
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <button class="language-toggle" onclick="toggleLanguage()">🌍 تغيير اللغة</button>
+        <img src="logo.png" alt="شعار الطاحونة" class="logo">
+        <h1 id="title">مصنع الطاحونة - Al-Tahoonah</h1>
+    </header>
+    <section>
+        <h2 id="sup">نبذة عن المصنع</h2>
+        <p id="about">في محددة الطاحونة، نوفر لك أجود أنواع الأبواب، النوافذ، الدرابزين، والهياكل المعدنية بتصاميم قوية ومبتكرة تناسب احتياجاتك</p>
+    </section>
+    <section>
+        <h2 id="contact">تواصل معنا</h2>
+        <p>📍 العنوان: بديا-شارع مسحة-بجانب مول برافو</p>
+        <p>📞 +الهاتف: 972 556689189</p>
+        <p>📧 البريد الإلكتروني: ultracoat.co@gmail.com</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/people/UltraCoat/61570737786717/" target="_blank"><img src="facebook-icon.png" alt="فيسبوك"></a>
+            <a href="https://api.whatsapp.com/send/?phone=972556689189&text&type=phone_number&app_absent=0" target="_blank"><img src="whatsapp-icon.png" alt="واتساب"></a>
+            <a href="https://www.tiktok.com/@ultracoat21" target="_blank"><img src="tiktok-icon.png" alt="تيك توك"></a>
+        </div>
+    </section>
+    <section>
+        <h2 id="works">أعمالنا</h2>
+        <div class="gallery">
+            <img src="work1.jpg" alt="عمل 1">
+            <img src="work2.jpg" alt="عمل 2">
+            <img src="work3.jpg" alt="عمل 3">
+            <img src="work4.jpg" alt="عمل 4">
+            <img src="work5.jpg" alt="عمل 5">
+        </div>
+    </section>
+    <footer>
+        &copy; 2025 Al-Tahoonah - جميع الحقوق محفوظة
+    </footer>
+</body>
+</html>
