@@ -90,11 +90,12 @@
                 document.getElementById("langbut").innerText = "🌍עִברִית";
             }
         }
-         async function loadGallery() {
+                 async function loadGallery() {
             const galleryContainer = document.querySelector(".gallery");
-            const repoOwner = "AnwarKH2";  // اسم المستخدم على GitHub
-            const repoName = "altahona";  // اسم المستودع
-            const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/`;
+            const repoOwner = "AnwarKH2"; 
+            const repoName = "altahona"; 
+            const folderPath = "gallery";  
+            const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${folderPath}`;
 
             try {
                 const response = await fetch(apiUrl);
@@ -104,7 +105,7 @@
                 files.forEach(file => {
                     if (file.type === "file" && (file.name.endsWith(".jpg") || file.name.endsWith(".png") || file.name.endsWith(".jpeg"))) {
                         const img = document.createElement("img");
-                        img.src = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${file.name}`;
+                        img.src = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${folderPath}/${file.name}`;
                         img.alt = "صورة من المعرض";
                         galleryContainer.appendChild(img);
                     }
