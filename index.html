@@ -5,17 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Al-Tahona</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; text-align: center; background-color: #f8f8f8; }
-        header { background-color: #004d40; color: white; padding: 20px; font-size: 24px; position: relative; }
-        .language-toggle { position: absolute; top: 10px; right: 20px; background: white; color: #004d40; border: none; padding: 5px 10px; cursor: pointer; border-radius: 5px; }
-        section { padding: 20px; }
-        footer { background-color: #004d40; color: white; padding: 10px; position: fixed; bottom: 0; width: 100%; }
-        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 20px; }
-        .gallery img { max-width: 100%; height: auto; border-radius: 8px; transition: transform 0.3s ease-in-out; cursor: pointer; }
-        .gallery img:hover { transform: scale(1.1); }
-        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); align-items: center; justify-content: center; }
-        .lightbox img { max-width: 90%; max-height: 90%; }
-        .lightbox.active { display: flex; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+        header {
+            background-color: #004d40;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            position: relative;
+        }
+        .language-toggle {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: white;
+            color: #004d40;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        section {
+            padding: 20px;
+        }
+        footer {
+            background-color: #004d40;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+            background: transparent;
+        }
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+        }
+        .gallery img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+        .social-icons img {
+            width: 30px;
+            height: auto;
+            margin: 5px;
+        }
     </style>
     <script>
         function toggleLanguage() {
@@ -44,38 +96,31 @@
                 document.getElementById("langbut").innerText = "🌍עִברִית";
             }
         }
-        async function loadGallery() {
+                 async function loadGallery() {
             const galleryContainer = document.querySelector(".gallery");
-            const repoOwner = "AnwarKH2", repoName = "altahona", folderPath = "gallery";
+            const repoOwner = "AnwarKH2"; 
+            const repoName = "altahona"; 
+            const folderPath = "gallery";  
             const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${folderPath}`;
+
             try {
                 const response = await fetch(apiUrl);
                 if (!response.ok) throw new Error("فشل في جلب البيانات");
+
                 const files = await response.json();
                 files.forEach(file => {
-                    if (file.type === "file" && /\.(jpg|png|jpeg)$/i.test(file.name)) {
+                    if (file.type === "file" && (file.name.endsWith(".jpg") || file.name.endsWith(".png") || file.name.endsWith(".jpeg"))) {
                         const img = document.createElement("img");
                         img.src = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${folderPath}/${file.name}`;
-                        img.loading = "lazy";
                         img.alt = "صورة من المعرض";
-                        img.onclick = () => openLightbox(img.src);
                         galleryContainer.appendChild(img);
                     }
                 });
             } catch (error) {
                 console.error("خطأ في تحميل الصور:", error);
-                galleryContainer.innerHTML = "<p>⚠️ تعذر تحميل الصور، يرجى المحاولة لاحقًا.</p>";
             }
         }
-        function openLightbox(src) {
-            const lightbox = document.querySelector(".lightbox");
-            const lightboxImg = lightbox.querySelector("img");
-            lightboxImg.src = src;
-            lightbox.classList.add("active");
-        }
-        function closeLightbox() {
-            document.querySelector(".lightbox").classList.remove("active");
-        }
+
         document.addEventListener("DOMContentLoaded", loadGallery);
     </script>
 </head>
@@ -104,9 +149,6 @@
         <h2 id="works">أعمالنا</h2>
         <div class="gallery">
         </div>
-    <div class="lightbox" onclick="closeLightbox()">
-        <img src="" alt="صورة مكبرة">
-    </div>
     </section>
     <footer>
         &copy; 2025 Al-Tahona - جميع الحقوق محفوظة
