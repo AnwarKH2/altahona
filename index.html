@@ -53,6 +53,10 @@
         .category-buttons { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
         .category-buttons button { padding: 10px; border: none; background: #004d40; color: white; cursor: pointer; border-radius: 5px; }
         .social-icons img {width: 30px;height: auto;margin: 5px;}
+
+        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); align-items: center; justify-content: center; }
+        .lightbox img { max-width: 90%; max-height: 90%; }
+        .lightbox.active { display: flex; }
     </style>
     <script>
         let currentLang = "ar";
@@ -107,12 +111,22 @@
                         const img = document.createElement("img");
                         img.src = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${folderPath}/${file.name}`;
                         img.alt = "صورة من المعرض";
+                        img.onclick = () => openLightbox(img.src);
                         galleryContainer.appendChild(img);
                     }
                 });
             } catch (error) {
                 console.error("خطأ في تحميل الصور:", error);
             }
+        }
+                function openLightbox(src) {
+            const lightbox = document.querySelector(".lightbox");
+            const lightboxImg = lightbox.querySelector("img");
+            lightboxImg.src = src;
+            lightbox.classList.add("active");
+        }
+        function closeLightbox() {
+            document.querySelector(".lightbox").classList.remove("active");
         }
         document.addEventListener("DOMContentLoaded", () => loadGallery('railings'));
         document.addEventListener("DOMContentLoaded", () => toggleLanguage());
@@ -148,6 +162,9 @@
             <button onclick="loadGallery('misc')">منوعات</button>
         </div>
         <div class="gallery"></div>
+                <div class="lightbox" onclick="closeLightbox()">
+            <img src="" alt="صورة مكبرة">
+        </div>
     </section>
     <footer>&copy; 2025 Al-Tahona - جميع الحقوق محفوظة</footer>
 </body>
