@@ -30,83 +30,60 @@
             cursor: pointer;
             border-radius: 5px;
         }
-        section {
-            padding: 20px;
-        }
-        footer {
-            background-color: #004d40;
-            color: white;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        .logo {
-            width: 200px;
-            height: auto;
-            margin-bottom: 10px;
-            background: transparent;
-        }
-        .gallery {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            padding: 20px;
-        }
-        .gallery img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            transition: transform 0.3s ease-in-out;
-        }
-        .gallery img:hover {
-            transform: scale(1.1);
-        }
-        .social-icons img {
-            width: 30px;
-            height: auto;
-            margin: 5px;
-        }
+        .gallery {display: flex;flex-direction: column;align-items: center;gap: 10px;padding: 20px;}
+        .gallery img { max-width: 200px; height: auto; border-radius: 8px; transition: transform 0.3s ease-in-out; }
+        .gallery img:hover { transform: scale(1.1); }
+        .category-buttons { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .category-buttons button { padding: 10px; border: none; background: #004d40; color: white; cursor: pointer; border-radius: 5px; }
+        .social-icons img {width: 30px;height: auto;margin: 5px;}
     </style>
     <script>
+        let currentLang = "ar";
         function toggleLanguage() {
-            const lang = document.documentElement.lang;
-            if (lang === "ar") {
-                document.documentElement.lang = "he";
-                document.getElementById("title").innerText = "טחונה בעמ";
-                document.getElementById("about").innerText = "במפעל טחונה אנו מספקים דלתות, חלונות, מעקות ומבנים מתכתיים בעיצובים איכותיים המתאימים לצרכים שלך.";
-                document.getElementById("contact").innerText = "צור קשר";
-                document.getElementById("works").innerText = "העבודות שלנו";
-                document.getElementById("sup").innerText = "סקירה על המפעל";
-                document.getElementById("address").innerText = "📍בידיא - רחוב מסחה - ליד קניון בראבו";
-                document.getElementById("phone").innerText = "📞 +הטלפון : 972 556689189";
-                document.getElementById("email").innerText = "📧 דואר אלקטרוני: ultracoat.co@gmail.com";
-                document.getElementById("langbut").innerText = "🌍عربية";
-            } else {
-                document.documentElement.lang = "ar";
-                document.getElementById("title").innerText = "Altahona";
-                document.getElementById("about").innerText = "في محددة الطاحونة، نوفر لك أجود أنواع الأبواب، النوافذ، الدرابزين، والهياكل المعدنية بتصاميم قوية ومبتكرة تناسب احتياجاتك";
-                document.getElementById("contact").innerText = "تواصل معنا";
-                document.getElementById("works").innerText = "أعمالنا";
-                document.getElementById("sup").innerText = "نبذة عن المصنع";
-                document.getElementById("address").innerText = "📍 العنوان: بديا-شارع مسحة-بجانب مول برافو";
-                document.getElementById("phone").innerText = "📞 +الهاتف: 972 556689189";
-                document.getElementById("email").innerText = "📧 البريد الإلكتروني: ultracoat.co@gmail.com";
-                document.getElementById("langbut").innerText = "🌍עִברִית";
-            }
+            currentLang = currentLang === "ar" ? "he" : "ar";
+            document.documentElement.lang = currentLang;
+            const translations = {
+                "ar": { "title": "Altahona", "works": "أعمالنا", "categories": ["درابزينات", "شبابيك", "أبواب", "منوعات"] 
+                        ,"sup": "نبذة عنا"
+                        ,"about": "في محددة الطاحونة، نوفر لك أجود أنواع الأبواب، النوافذ، الدرابزين، والهياكل المعدنية بتصاميم قوية ومبتكرة تناسب احتياجاتك"
+                        ,"contact": "تواصل معنا"
+                        ,"address": "📍 العنوان: بديا-شارع مسحة-بجانب مول برافو"
+                        ,"phone": "📞 +الهاتف: 972 556689189"
+                        ,"email": "📧 البريد الإلكتروني: ultracoat.co@gmail.com"
+                        ,"langto": "🌍עִברִית"
+                },
+                "he": { "title": 'טחנה בע"מ', "works": "העבודות שלנו", "categories": ["מעקות", "חלונות", "דלתות", "שונות"]
+                        ,"sup": "אודותינו"
+                        ,"about": "במפעל טחונה אנו מספקים דלתות, חלונות, מעקות ומבנים מתכתיים בעיצובים איכותיים המתאימים לצרכים שלך."
+                        ,"contact": "צור קשר"
+                        ,"address": "📍בידיא - רחוב מסחה - ליד קניון בראבו"
+                        ,"phone": "📞 +הטלפון : 972 556689189"
+                        ,"email": "📧 דואר אלקטרוני: ultracoat.co@gmail.com"
+                        ,"langto": "🌍العربية"
+                }
+            };
+            document.getElementById("langto").innerText = translations[currentLang].langto;
+            document.getElementById("about").innerText = translations[currentLang].about;
+            document.getElementById("contact").innerText = translations[currentLang].contact;
+            document.getElementById("address").innerText = translations[currentLang].address;
+            document.getElementById("phone").innerText = translations[currentLang].phone;
+            document.getElementById("email").innerText = translations[currentLang].email;
+            document.getElementById("title").innerText = translations[currentLang].title;
+            document.getElementById("sup").innerText = translations[currentLang].sup;
+            document.getElementById("works").innerText = translations[currentLang].works;
+            const buttons = document.querySelectorAll(".category-buttons button");
+            buttons.forEach((btn, index) => btn.innerText = translations[currentLang].categories[index]);
         }
-                 async function loadGallery() {
+        async function loadGallery(category) {
             const galleryContainer = document.querySelector(".gallery");
-            const repoOwner = "AnwarKH2"; 
-            const repoName = "altahona"; 
-            const folderPath = "gallery";  
+            galleryContainer.innerHTML = "";
+            const repoOwner = "AnwarKH20";
+            const repoName = "origen";
+            const folderPath = category;
             const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${folderPath}`;
-
             try {
                 const response = await fetch(apiUrl);
                 if (!response.ok) throw new Error("فشل في جلب البيانات");
-
                 const files = await response.json();
                 files.forEach(file => {
                     if (file.type === "file" && (file.name.endsWith(".jpg") || file.name.endsWith(".png") || file.name.endsWith(".jpeg"))) {
@@ -120,18 +97,23 @@
                 console.error("خطأ في تحميل الصور:", error);
             }
         }
-
-        document.addEventListener("DOMContentLoaded", loadGallery);
+        document.addEventListener("DOMContentLoaded", () => loadGallery('railings'));
+        document.addEventListener("DOMContentLoaded", () => toggleLanguage());
     </script>
 </head>
 <body>
     <header>
-        <button id="langbut" class="language-toggle" onclick="toggleLanguage()">🌍עִברִית</button>
+        <button id="langto" class="language-toggle" onclick="toggleLanguage()">🌍עִברִית</button>
         <img src="logo.png" alt="شعار الطاحونة" class="logo">
         <h1 id="title">Altahona</h1>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/people/UltraCoat/61570737786717/" target="_blank"><img src="facebook-icon.png" alt="فيسبوك"></a>
+            <a href="https://api.whatsapp.com/send/?phone=972556689189&text&type=phone_number&app_absent=0" target="_blank"><img src="whatsapp-icon.png" alt="واتساب"></a>
+            <a href="https://www.tiktok.com/@ultracoat21" target="_blank"><img src="tiktok-icon.png" alt="تيك توك"></a>
+        </div>
     </header>
     <section>
-        <h2 id="sup">نبذة عن المصنع</h2>
+        <h2 id="sup">نبذة عنا</h2>
         <p id="about">في محددة الطاحونة، نوفر لك أجود أنواع الأبواب، النوافذ، الدرابزين، والهياكل المعدنية بتصاميم قوية ومبتكرة تناسب احتياجاتك</p>
     </section>
     <section>
@@ -139,19 +121,17 @@
         <p id="address">📍 العنوان: بديا-شارع مسحة-بجانب مول برافو</p>
         <p id="phone">📞 +الهاتف: 972 556689189</p>
         <p id="email">📧 البريد الإلكتروني: ultracoat.co@gmail.com</p>
-        <div class="social-icons">
-            <a href="https://www.facebook.com/people/UltraCoat/61570737786717/" target="_blank"><img src="facebook-icon.png" alt="فيسبوك"></a>
-            <a href="https://api.whatsapp.com/send/?phone=972556689189&text&type=phone_number&app_absent=0" target="_blank"><img src="whatsapp-icon.png" alt="واتساب"></a>
-            <a href="https://www.tiktok.com/@ultracoat21" target="_blank"><img src="tiktok-icon.png" alt="تيك توك"></a>
-        </div>
     </section>
     <section>
         <h2 id="works">أعمالنا</h2>
-        <div class="gallery">
+        <div class="category-buttons">
+            <button onclick="loadGallery('railings')">درابزينات</button>
+            <button onclick="loadGallery('windows')">شبابيك</button>
+            <button onclick="loadGallery('doors')">أبواب</button>
+            <button onclick="loadGallery('misc')">منوعات</button>
         </div>
+        <div class="gallery"></div>
     </section>
-    <footer>
-        &copy; 2025 Al-Tahona - جميع الحقوق محفوظة
-    </footer>
+    <footer>&copy; 2025 Al-Tahona - جميع الحقوق محفوظة</footer>
 </body>
 </html>
